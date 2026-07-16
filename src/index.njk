@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+title: ""
+nav: work
+permalink: /
+---
+<section class="view grid-view" id="grid-view" data-view="grid">
+  <div class="masonry-grid">
+    {% for item in works %}
+    {% if item.image %}
+    <a class="grid-item" href="/work/{{ item.slug }}/">
+      <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" width="800" height="800">
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="view list-view" id="list-view" data-view="list" hidden>
+  <ol class="index-list">
+    {% for item in works | sortByYearDesc %}
+    <li class="index-row">
+      <a href="/work/{{ item.slug }}/">
+        <span class="index-title">{{ item.title }}</span>
+        <span class="index-context">{{ item.publication or item.location }}</span>
+        <span class="index-year">{{ item.year }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+<div class="view-toggle">
+  <button type="button" id="toggle-grid" class="toggle-btn" aria-pressed="true">Grid</button>
+  <span class="toggle-sep">/</span>
+  <button type="button" id="toggle-list" class="toggle-btn" aria-pressed="false">List</button>
+</div>

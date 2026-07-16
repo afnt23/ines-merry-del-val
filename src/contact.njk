@@ -1,0 +1,12 @@
+---
+layout: layouts/base.njk
+title: Contact
+nav: contact
+permalink: /contact/
+---
+<section class="contact">
+  <h1 class="contact-name">{{ site.name }}</h1>
+  <p class="contact-role">{{ site.role }}</p>
+  <p class="contact-email"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  {% if site.instagram %}<p class="contact-social"><a href="https://instagram.com/{{ site.instagram }}">Instagram</a></p>{% endif %}
+</section>

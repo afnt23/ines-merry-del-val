@@ -1,0 +1,32 @@
+---
+pagination:
+  data: works
+  size: 1
+  alias: item
+permalink: "/work/{{ item.slug }}/"
+layout: layouts/base.njk
+nav: work
+eleventyComputed:
+  title: "{{ item.title }}"
+  description: "{{ item.title }}, {{ item.location }} ({{ item.year }})"
+---
+<article class="work-detail{% if not item.image %} work-detail--text{% endif %}">
+  {% if item.image %}
+  <div class="work-image">
+    <img src="{{ item.image }}" alt="{{ item.title }}">
+  </div>
+  {% endif %}
+
+  <div class="work-meta">
+    <h1 class="work-title">{{ item.title }}</h1>
+    <p class="work-sub">{% if item.location %}{{ item.location }}{% endif %}{% if item.location and item.year %}, {% endif %}{{ item.year }}</p>
+    {% if item.publication %}<p class="work-publication">{{ item.publication }}</p>{% endif %}
+  </div>
+
+  <p class="work-credit">{{ item.credit }}</p>
+
+  <nav class="work-pager" aria-label="Work navigation">
+    {% if pagination.href.previous %}<a class="pager-prev" href="{{ pagination.href.previous }}" aria-label="Previous work">←</a>{% else %}<span></span>{% endif %}
+    {% if pagination.href.next %}<a class="pager-next" href="{{ pagination.href.next }}" aria-label="Next work">→</a>{% endif %}
+  </nav>
+</article>

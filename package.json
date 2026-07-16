@@ -1,0 +1,13 @@
+{
+  "name": "ines-merry-del-val",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio site for photographer/journalist Ines Merry Del Val",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
