@@ -178,6 +178,14 @@ img {
   align-items: center;
 }
 
+.work-gallery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
 .work-image {
   width: 100%;
   display: flex;

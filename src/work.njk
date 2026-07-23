@@ -11,7 +11,15 @@ eleventyComputed:
   description: "{{ item.title }}, {{ item.location }} ({{ item.year }})"
 ---
 <article class="work-detail{% if not item.image %} work-detail--text{% endif %}">
-  {% if item.image %}
+  {% if item.images.length %}
+  <div class="work-gallery">
+    {% for src in item.images %}
+    <div class="work-image">
+      <img src="{{ src }}" alt="{{ item.title }}" loading="lazy">
+    </div>
+    {% endfor %}
+  </div>
+  {% elif item.image %}
   <div class="work-image">
     <img src="{{ item.image }}" alt="{{ item.title }}">
   </div>
