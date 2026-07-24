@@ -45,12 +45,24 @@ img {
   padding: 28px 24px;
 }
 
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.site-logo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
 .site-title {
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: 1.05rem;
   letter-spacing: 0.01em;
-  text-decoration: none;
 }
 
 .site-menu {
