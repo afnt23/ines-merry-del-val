@@ -1,43 +1,28 @@
 (function () {
-  var gridView = document.getElementById("grid-view");
-  var listView = document.getElementById("list-view");
-  var btnGrid = document.getElementById("toggle-grid");
-  var btnList = document.getElementById("toggle-list");
-
-  if (gridView && listView && btnGrid && btnList) {
-    var setView = function (view) {
-      var isList = view === "list";
-      gridView.hidden = isList;
-      listView.hidden = !isList;
-      btnGrid.setAttribute("aria-pressed", String(!isList));
-      btnList.setAttribute("aria-pressed", String(isList));
-      try {
-        localStorage.setItem("imdv-view", view);
-      } catch (e) {}
+  // ── menu toggle ─────────────────────────────────────────
+  var menuToggle = document.getElementById("menu-toggle");
+  var menuPanel = document.getElementById("menu-panel");
+  if (menuToggle && menuPanel) {
+    var closeMenu = function () {
+      menuPanel.hidden = true;
+      menuToggle.setAttribute("aria-expanded", "false");
     };
-
-    btnGrid.addEventListener("click", function () {
-      setView("grid");
+    var openMenu = function () {
+      menuPanel.hidden = false;
+      menuToggle.setAttribute("aria-expanded", "true");
+    };
+    menuToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (menuPanel.hidden) openMenu();
+      else closeMenu();
     });
-    btnList.addEventListener("click", function () {
-      setView("list");
+    document.addEventListener("click", function (e) {
+      if (!menuPanel.hidden && !menuPanel.contains(e.target) && e.target !== menuToggle) closeMenu();
     });
-
-    var saved;
-    try {
-      saved = localStorage.getItem("imdv-view");
-    } catch (e) {}
-    if (saved === "list") setView("list");
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !menuPanel.hidden) closeMenu();
+    });
   }
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-    if (document.getElementById("lightbox") && !document.getElementById("lightbox").hidden) return;
-    var prev = document.querySelector(".pager-prev");
-    var next = document.querySelector(".pager-next");
-    if (e.key === "ArrowLeft" && prev) window.location.href = prev.href;
-    if (e.key === "ArrowRight" && next) window.location.href = next.href;
-  });
 
   // ── image fade-in on load ──────────────────────────────
   var fadeImages = document.querySelectorAll(".gallery-image, .grid-image");

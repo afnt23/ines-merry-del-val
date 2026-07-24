@@ -1,14 +1,14 @@
 ---
+layout: layouts/base.njk
 pagination:
   data: works
   size: 1
   alias: item
-permalink: "/work/{{ item.slug }}/"
-layout: layouts/base.njk
-nav: work
 eleventyComputed:
+  permalink: "{{ item.url }}"
   title: "{{ item.title }}"
-  description: "{{ item.title }}, {{ item.location }} ({{ item.year }})"
+  description: "{{ item.title }}{% if item.caption %} — {{ item.caption }}{% endif %}"
+  nav: "{{ item.slug }}"
 ---
 <article class="work-detail{% if not item.image %} work-detail--text{% endif %}">
   {% if item.images.length %}
@@ -37,17 +37,27 @@ eleventyComputed:
 
   <div class="work-meta">
     <h1 class="work-title">{{ item.title }}</h1>
-    <p class="work-sub">{% if item.location %}{{ item.location }}{% endif %}{% if item.location and item.year %}, {% endif %}{{ item.year }}</p>
+    {% if item.caption %}<p class="work-sub">{{ item.caption }}</p>{% endif %}
+    {% if item.location %}<p class="work-sub">{{ item.location }}</p>{% endif %}
     {% if item.publication %}<p class="work-publication">{{ item.publication }}</p>{% endif %}
   </div>
 
   <p class="work-credit">{{ item.credit }}</p>
-
-  <nav class="work-pager" aria-label="Work navigation">
-    {% if pagination.href.previous %}<a class="pager-prev" href="{{ pagination.href.previous }}" aria-label="Previous work">←</a>{% else %}<span></span>{% endif %}
-    {% if pagination.href.next %}<a class="pager-next" href="{{ pagination.href.next }}" aria-label="Next work">→</a>{% endif %}
-  </nav>
 </article>
+
+<section class="related-works">
+  <h2 class="section-label">Related Works</h2>
+  <div class="related-row">
+    {% for other in works %}
+    {% if other.slug != item.slug %}
+    <a class="related-tile" href="{{ other.url }}">
+      <img class="related-image grid-image" src="{{ other.image }}" alt="{{ other.title }}" loading="lazy" width="800" height="800">
+      <span class="related-title">{{ other.title }}</span>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
 
 {% if item.images.length %}
 <div class="lightbox" id="lightbox" hidden>

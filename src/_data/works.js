@@ -6,10 +6,38 @@ const IMAGE_EXT = /\.(jpe?g|png)$/i;
 const DIMENSIONS = JSON.parse(fs.readFileSync(path.join(__dirname, "image-dimensions.json"), "utf8"));
 
 const projects = [
-  { order: 1, slug: "myanmar", title: "Myanmar", folder: "Myamar", cover: "MYAMAR April 2014-394.jpg", year: 2014 },
-  { order: 2, slug: "light", title: "Light", folder: "Light", cover: "DSC_0514.JPG", year: "" },
-  { order: 3, slug: "cut", title: "Cut", folder: "Cut", cover: "chair (3).JPG", year: "" },
-  { order: 4, slug: "within", title: "Within", folder: "Whitin", cover: "DSC_0342.JPG", year: "" },
+  {
+    order: 1,
+    slug: "cut",
+    title: "Cut",
+    folder: "Cut",
+    cover: "chair (3).JPG",
+    caption: "Objects, furniture, and the shapes we leave behind.",
+  },
+  {
+    order: 2,
+    slug: "myanmar",
+    title: "Myanmar",
+    folder: "Myamar",
+    cover: "MYAMAR April 2014-394.jpg",
+    caption: "Daily life along the Irrawaddy.",
+  },
+  {
+    order: 3,
+    slug: "light",
+    title: "Light",
+    folder: "Light",
+    cover: "DSC_0514.JPG",
+    caption: "Studies in light, shadow, and stillness.",
+  },
+  {
+    order: 4,
+    slug: "within",
+    title: "Within",
+    folder: "Whitin",
+    cover: "DSC_0342.JPG",
+    caption: "Interiors, and the spaces we inhabit.",
+  },
 ];
 
 module.exports = () => {
@@ -33,10 +61,11 @@ module.exports = () => {
     return {
       order: project.order,
       slug: project.slug,
+      url: project.slug === "cut" ? "/" : `/work/${project.slug}/`,
       title: project.title,
       location: "",
       publication: "",
-      year: project.year,
+      caption: project.caption,
       category: "photography",
       image: images[0].src,
       images,
