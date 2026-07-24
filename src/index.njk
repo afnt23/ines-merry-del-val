@@ -9,7 +9,7 @@ permalink: /
     {% for item in works %}
     {% if item.image %}
     <a class="grid-item" href="/work/{{ item.slug }}/">
-      <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" width="800" height="800">
+      <img class="grid-image" src="{{ item.image }}" alt="{{ item.title }}" loading="lazy" width="800" height="800">
     </a>
     {% endif %}
     {% endfor %}

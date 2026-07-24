@@ -12,10 +12,20 @@ eleventyComputed:
 ---
 <article class="work-detail{% if not item.image %} work-detail--text{% endif %}">
   {% if item.images.length %}
-  <div class="work-gallery">
-    {% for src in item.images %}
-    <div class="work-image">
-      <img src="{{ src }}" alt="{{ item.title }}" loading="lazy">
+  <div class="work-masonry" data-lightbox aria-label="{{ item.title }} photo gallery">
+    {% for img in item.images %}
+    <div class="masonry-item" style="aspect-ratio: {{ img.width }} / {{ img.height }}">
+      <button type="button" class="image-tile" data-index="{{ loop.index0 }}" aria-label="Open photo {{ loop.index }}">
+        <img
+          class="gallery-image"
+          src="{{ img.src }}"
+          alt="{{ item.title }}"
+          width="{{ img.width }}"
+          height="{{ img.height }}"
+          loading="{% if loop.index0 < 8 %}eager{% else %}lazy{% endif %}"
+          {% if loop.index0 < 4 %}fetchpriority="high"{% endif %}
+        >
+      </button>
     </div>
     {% endfor %}
   </div>
@@ -38,3 +48,18 @@ eleventyComputed:
     {% if pagination.href.next %}<a class="pager-next" href="{{ pagination.href.next }}" aria-label="Next work">→</a>{% endif %}
   </nav>
 </article>
+
+{% if item.images.length %}
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-topbar">
+    <span class="lightbox-counter" id="lightbox-counter"></span>
+    <button type="button" class="lightbox-close" id="lightbox-close">Close</button>
+  </div>
+  <div class="lightbox-stage" id="lightbox-stage">
+    <img class="lightbox-image" id="lightbox-image" alt="{{ item.title }}">
+  </div>
+  <div class="lightbox-hint">← → navigate&nbsp;&nbsp;·&nbsp;&nbsp;esc close</div>
+  <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous">‹</button>
+  <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next">›</button>
+</div>
+{% endif %}
