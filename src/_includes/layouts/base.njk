@@ -12,7 +12,7 @@
     <a class="site-title" href="/">{{ site.name }}</a>
     <div class="site-menu">
       <button type="button" id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="menu-panel">Menu</button>
-      <nav id="menu-panel" class="menu-panel" hidden>
+      <nav id="menu-panel" class="menu-panel">
         {% for w in works %}
         <a href="{{ w.url }}"{% if nav == w.slug %} aria-current="page"{% endif %}>{{ w.title }}</a>
         {% endfor %}

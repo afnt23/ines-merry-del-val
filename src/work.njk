@@ -7,7 +7,7 @@ pagination:
 eleventyComputed:
   permalink: "{{ item.url }}"
   title: "{{ item.title }}"
-  description: "{{ item.title }}{% if item.caption %} — {{ item.caption }}{% endif %}"
+  description: "{{ item.title }}"
   nav: "{{ item.slug }}"
 ---
 <article class="work-detail{% if not item.image %} work-detail--text{% endif %}">
@@ -37,12 +37,9 @@ eleventyComputed:
 
   <div class="work-meta">
     <h1 class="work-title">{{ item.title }}</h1>
-    {% if item.caption %}<p class="work-sub">{{ item.caption }}</p>{% endif %}
     {% if item.location %}<p class="work-sub">{{ item.location }}</p>{% endif %}
     {% if item.publication %}<p class="work-publication">{{ item.publication }}</p>{% endif %}
   </div>
-
-  <p class="work-credit">{{ item.credit }}</p>
 </article>
 
 <section class="related-works">

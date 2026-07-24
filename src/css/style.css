@@ -65,49 +65,68 @@ img {
   font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   color: var(--fg);
-  padding: 4px;
+  padding: 6px 2px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.menu-toggle:hover {
+  opacity: 1;
 }
 
 .menu-panel {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 18px);
   right: 0;
   background: var(--bg);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--fg);
   display: flex;
   flex-direction: column;
-  min-width: 170px;
-  padding: 8px 0;
+  min-width: 220px;
+  padding: 22px 0;
   z-index: 40;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
 }
 
-.menu-panel[hidden] {
-  display: none;
+.menu-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .menu-panel a {
-  padding: 10px 20px;
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  padding: 11px 28px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   text-decoration: none;
   color: var(--fg);
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
 }
 
 .menu-panel a:hover {
-  background: rgba(0, 0, 0, 0.04);
+  opacity: 1;
 }
 
 .menu-panel a[aria-current="page"] {
-  font-weight: 700;
+  opacity: 1;
+  font-style: italic;
 }
 
 .menu-divider {
   height: 1px;
   background: rgba(0, 0, 0, 0.1);
-  margin: 8px 20px;
+  margin: 11px 28px;
 }
 
 /* Work detail */
@@ -368,17 +387,6 @@ img {
   margin: 0;
 }
 
-.work-credit {
-  width: 100%;
-  max-width: 900px;
-  text-align: right;
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-top: 32px;
-}
-
 /* Related works */
 
 .section-label {
@@ -476,7 +484,16 @@ img {
   }
 
   .menu-panel {
-    min-width: 150px;
+    min-width: 190px;
+    padding: 18px 0;
+  }
+
+  .menu-panel a {
+    padding: 10px 22px;
+  }
+
+  .menu-divider {
+    margin: 9px 22px;
   }
 
   .work-detail {
@@ -493,10 +510,6 @@ img {
 
   .work-title {
     font-size: 1.25rem;
-  }
-
-  .work-credit {
-    text-align: left;
   }
 
   .related-works {

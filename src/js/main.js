@@ -3,24 +3,29 @@
   var menuToggle = document.getElementById("menu-toggle");
   var menuPanel = document.getElementById("menu-panel");
   if (menuToggle && menuPanel) {
+    var isOpen = function () {
+      return menuPanel.classList.contains("is-open");
+    };
     var closeMenu = function () {
-      menuPanel.hidden = true;
+      menuPanel.classList.remove("is-open");
       menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "Menu";
     };
     var openMenu = function () {
-      menuPanel.hidden = false;
+      menuPanel.classList.add("is-open");
       menuToggle.setAttribute("aria-expanded", "true");
+      menuToggle.textContent = "Close";
     };
     menuToggle.addEventListener("click", function (e) {
       e.stopPropagation();
-      if (menuPanel.hidden) openMenu();
-      else closeMenu();
+      if (isOpen()) closeMenu();
+      else openMenu();
     });
     document.addEventListener("click", function (e) {
-      if (!menuPanel.hidden && !menuPanel.contains(e.target) && e.target !== menuToggle) closeMenu();
+      if (isOpen() && !menuPanel.contains(e.target) && e.target !== menuToggle) closeMenu();
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !menuPanel.hidden) closeMenu();
+      if (e.key === "Escape" && isOpen()) closeMenu();
     });
   }
 
