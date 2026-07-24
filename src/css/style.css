@@ -484,6 +484,21 @@ img {
   margin: 0;
 }
 
+/* Footer */
+
+.site-footer {
+  padding: 32px 24px 40px;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
 /* Responsive */
 
 @media (max-width: 640px) {
