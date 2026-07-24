@@ -7,7 +7,7 @@ const DIMENSIONS = JSON.parse(fs.readFileSync(path.join(__dirname, "image-dimens
 
 const projects = [
   { order: 1, slug: "cut", title: "Cut", folder: "Cut", cover: "chair (3).JPG" },
-  { order: 2, slug: "myanmar", title: "Myanmar", folder: "Myamar", cover: "MYAMAR April 2014-394.jpg" },
+  { order: 2, slug: "myanmar", title: "အရောင်", folder: "Myamar", cover: "MYAMAR April 2014-898.jpg" },
   { order: 3, slug: "light", title: "Light", folder: "Light", cover: "DSC_0514.JPG" },
   { order: 4, slug: "within", title: "Within", folder: "Whitin", cover: "DSC_0342.JPG" },
 ];

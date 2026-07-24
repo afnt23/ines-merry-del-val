@@ -6,8 +6,8 @@ pagination:
   alias: item
 eleventyComputed:
   permalink: "{{ item.url }}"
-  title: "{{ item.title }}"
-  description: "{{ item.title }}"
+  title: "{% if item.url != '/' %}{{ item.title }}{% endif %}"
+  description: "{% if item.url != '/' %}{{ item.title }}{% endif %}"
   nav: "{{ item.slug }}"
 ---
 <article class="work-detail{% if not item.image %} work-detail--text{% endif %}">
